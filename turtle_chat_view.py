@@ -1,10 +1,16 @@
 #2016-2017 PERSONAL PROJECTS: TurtleChat!
 #WRITE YOUR NAME HERE!
+"""
+Shira Struminski
+"""
 
 #####################################################################################
 #                                   IMPORTS                                         #
 #####################################################################################
 #import the turtle module
+import turtle
+from turtle_chat_client import Client
+from turtle_chat_widgets import Button,TextInput
 #import the Client class from the turtle_chat_client module
 #Finally, from the turtle_chat_widgets module, import two classes: Button and TextInput
 #####################################################################################
@@ -16,7 +22,26 @@
 #Make a class called TextBox, which will be a subclass of TextInput.
 #Because TextInput is an abstract class, you must implement its abstract
 #methods.  There are two:
-#
+class TextBox(TextInput):
+    def draw_box(self):
+        self.pos=(-100,-100)
+        drawing=turtle.clone()
+        drawing.penup()
+        drawing.goto(self.pos)
+        drawing.pendown()
+        e=drawing.goto(self.pos[0]+self.width,self.pos[1])
+        g=drawing.goto(self.pos[0]+self.width,self.pos[1]+self.height)
+        l=drawing.goto(self.pos[0],self.pos[1]+self.height)
+        drawing.goto(self.pos)
+        drawing.hideturtle()
+
+    def write_msg(self):
+        self.writer.clear()
+        self.writer.write(self.new_msg)
+        '''
+       in here add the range for the text, if the range
+       of the rectangle reached, open new line.
+       '''
 #draw_box
 #write_msg
 #
@@ -44,7 +69,15 @@
 #Make a class called SendButton, which will be a subclass of Button.
 #Button is an abstract class with one abstract method: fun.
 #fun gets called whenever the button is clicked.  It's jobs will be to
-#
+
+
+class SendButton(Button):
+    def __init__(self,my_turtle=None,shape=None,pos=(0,0),the_view):
+        super(SendButton,self).__init__()
+        the_view=View()
+        '''
+    how do i call send???????????????????????????
+    '''
 # 1. send a message to the other chat participant - to do this,
 #    you will need to call the send method of your Client instance
 # 2. update the messages that you see on the screen
@@ -62,7 +95,10 @@
 ##################################################################
 #Make a new class called View.  It does not need to have a parent
 #class mentioned explicitly.
-#
+
+
+
+
 #Read the comments below for hints and directions.
 ##################################################################
 ##################################################################
@@ -80,12 +116,14 @@ class View:
         ###
         #Store the username and partner_name into the instance.
         ###
-
+        self.username=username
+        self.partner_name=partner_name
         ###
         #Make a new client object and store it in this instance of View
         #(i.e. self).  The name of the instance should be my_client
         ###
-
+        my_client=Client()
+        self.my_client=my_client
         ###
         #Set screen dimensions using turtle.setup
         #You can get help on this function, as with other turtle functions,
@@ -105,22 +143,24 @@ class View:
         #   self.msg_queue.append(a_msg_string)
         self.msg_queue=[]
         ###
-
+        self.msg_queue.append(self.new_msg)
         ###
         #Create one turtle object for each message to display.
         #You can use the clear() and write() methods to erase
         #and write messages for each
         ###
-
+        self.msg_queue
         ###
         #Create a TextBox instance and a SendButton instance and
         #Store them inside of this instance
         ###
-
+        m=TextBox()
+        k=SendButton()
         ###
         #Call your setup_listeners() function, if you have one,
         #and any other remaining setup functions you have invented.
         ###
+        setup_listeners()
 
     def send_msg(self):
         '''
@@ -132,7 +172,10 @@ class View:
         It should call self.display_msg() to cause the message
         display to be updated.
         '''
-        pass
+        
+
+
+        self.msg_queue.append(self.new_msg)
 
     def get_msg(self):
         return self.textbox.get_msg()
