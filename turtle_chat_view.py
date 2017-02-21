@@ -39,10 +39,8 @@ class TextBox(TextInput):
 
     def write_msg(self):
         self.writer.clear()
-        self.writer.write(self.new_msg, font=("orido",11,"normal"))
-        
-        ##if self.writer not in range(self.pos[0],self.pos[0]+self.width):
-            ##self.new_msg/r
+        self.writer.write(self.new_msg, font=("ChewedPenBB",16,"normal"))
+
         '''
        in here add the range for the text, if the range
        of the rectangle reached, open new line.
@@ -79,20 +77,14 @@ class TextBox(TextInput):
 
 class SendButton(Button):
     def __init__(self,the_view):
-        super(SendButton,self).__init__(pos = (0,-150))
+        image= "/home/student/shira/meet201617YL1cs-chat/i.gif"
+        super(SendButton,self).__init__(pos = (0,-150),shape=image)
         self.the_view=the_view
         
     def fun(self,x=None,y=None):
         self.the_view.send_msg()
-'''
-    how do i call send???????????????????????????
-'''
 
 
-"""
-a=SendButton()
-a.fun()
-"""
 # 1. send a message to the other chat participant - to do this,
 #    you will need to call the send method of your Client instance
 # 2. update the messages that you see on the screen
@@ -192,10 +184,8 @@ class View:
         It should call self.display_msg() to cause the message
         display to be updated.
         '''
-        
-
         self.my_client.send(self.m.new_msg)
-        self.msg_queue.append(self.m.new_msg)
+        self.msg_queue.append(self.username+" says:\r" +self.m.new_msg)
         ##self.m.write_msg(self.new_msg)
         self.m.writer.clear()
         self.m.new_msg=''
@@ -233,16 +223,47 @@ class View:
         #or append (to put at the end).
         #
         #Then, call the display_msg method to update the display
-        self.msg_queue.append(msg)
+        self.msg_queue.append(show_this_msg)
+        #self.msg_queue.append(msg)
         self.display_msg()
     def display_msg(self):
         '''
         This method should update the messages displayed in the screen.
         You can get the messages you want from self.msg_queue
         '''
+        ###hiding the annoying turtles
+        self.t1.hideturtle()
+        self.t2.hideturtle()
+        self.t3.hideturtle()
+        self.t4.hideturtle()
+        self.t5.hideturtle()
+        ###pen uping
+        self.t1.penup()
+        self.t2.penup()
+        self.t3.penup()
+        self.t4.penup()
+        self.t5.penup()
+        ### starting actuall writing
         self.t1.clear()
-        self.t1.write(self.msg_queue[-1])
-
+        self.t1.goto(-100,200)
+        self.t1.write(self.msg_queue[-1], font=("Escalope",18,"normal"))
+        if len(self.msg_queue)>=2:
+            
+            self.t2.clear()
+            self.t2.goto(-100,150)
+            self.t2.write(self.msg_queue[-2], font=("Escalope",18,"normal"))
+        if len(self.msg_queue)>=3:
+            self.t3.clear()
+            self.t3.goto(-100,100)
+            self.t3.write(self.msg_queue[-3], font=("Escalope",18,"normal"))
+        if len(self.msg_queue)>=4:
+            self.t4.clear()
+            self.t4.goto(-100,50)
+            self.t4.write(self.msg_queue[-4], font=("Escalope",18,"normal"))
+        if len(self.msg_queue)>=5:
+            self.t5.clear()
+            self.t5.goto(-100,20)
+            self.t5.write(self.msg_queue[-5], font=("Escalope",18,"normal"))
     def get_client(self):
         return self.my_client
 ##############################################################
