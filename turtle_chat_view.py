@@ -196,11 +196,10 @@ class View:
 
         self.my_client.send(self.m.new_msg)
         self.msg_queue.append(self.m.new_msg)
-        ##self.m.writer.goto(0,300)
         ##self.m.write_msg(self.new_msg)
         self.m.writer.clear()
         self.m.new_msg=''
-        ##self.m.writer.goto(0,-125)
+        self.display_msg()
     def get_msg(self):
         return self.textbox.get_msg()
 
@@ -234,13 +233,15 @@ class View:
         #or append (to put at the end).
         #
         #Then, call the display_msg method to update the display
-
+        self.msg_queue.append(msg)
+        self.display_msg()
     def display_msg(self):
         '''
         This method should update the messages displayed in the screen.
         You can get the messages you want from self.msg_queue
         '''
-        pass
+        self.t1.clear()
+        self.t1.write(self.msg_queue[-1])
 
     def get_client(self):
         return self.my_client
