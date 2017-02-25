@@ -26,7 +26,7 @@ class TextBox(TextInput):
     def draw_box(self):
         self.pos=(-100,-135)
         screen= turtle.Screen()
-        background="C:/Users/User/Desktop/GitHub/meet201617YL1cs-chat/the.gif"
+        background="the.gif"
         screen.bgpic(background)
         drawing=turtle.clone()
         drawing.penup()
