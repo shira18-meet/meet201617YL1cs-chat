@@ -77,7 +77,7 @@ class TextBox(TextInput):
 #####################################################################################
 #Make a class called SendButton, which will be a subclass of Button.
 #Button is an abstract class with one abstract method: fun.
-<<<<<<< HEAD
+
 #fun gets called whenever the button is clicked.  It's jobs will be to
 
 
@@ -91,10 +91,10 @@ class SendButton(Button):
         self.the_view.send_msg()
 
 
-=======
+
 #fun gets called whenever the button is clicked.  Its jobs will be to
 #
->>>>>>> refs/remotes/meet-projects/master
+
 # 1. send a message to the other chat participant - to do this,
 #    you will need to call the send method of your Client instance
 # 2. update the messages that you see on the screen
