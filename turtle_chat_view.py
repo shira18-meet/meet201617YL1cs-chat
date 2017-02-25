@@ -83,7 +83,7 @@ class TextBox(TextInput):
 
 class SendButton(Button):
     def __init__(self,the_view):
-        image= "C:/Users/User/Desktop/GitHub/meet201617YL1cs-chat/i.gif"
+        image= "i.gif"
         super(SendButton,self).__init__(pos = (0,-170),shape=image)
         self.the_view=the_view
         
